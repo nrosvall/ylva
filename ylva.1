@@ -1,0 +1,99 @@
+.\" Manpage for Ylva.
+.\" Any errors or typos, contact niko@byteptr.com.
+
+.TH man 1 "17 May 2019" "1.4" "ylva man page"
+.SH NAME
+ylva \- command line password manager
+.SH SYNOPSIS
+ylva [FLAGS] <OPTIONS>
+.SH DESCRIPTION
+Ylva is a command line
+password manager and a file encryption program
+for Unix like operating systems.
+.SH OPTIONS
+.IP "-i, --init <path>"
+Initialize new database
+.IP "-e, --encrypt"
+Encrypt current database
+.IP "-d, --decrypt <path>"
+Decrypt database
+.IP "-a, --add"
+Add new entry
+.IP "-a, --add -I"
+Add new entry to database interactively
+.IP "-s, --show-db-path"
+Show current database path
+.IP "-u, --use-db <path>"
+Switch using another database
+.IP "-r, --remove <id>"
+Remove entry pointed by id
+.IP "-f, --find <search>"
+Search for entries
+.IP "-F, --regex <search>"
+Search for entries with regular expressions
+.IP "-c, --edit <id>"
+Edit entry pointed by id
+.IP "-f, --find <search>"
+Search database
+.IP "-l, --list-entry <id>"
+List entry pointed by id
+.IP "-t, --show-latest <count>"
+Show latest entries
+.IP "-A, --list-all"
+Show database statuses
+.IP "-V, --version"
+Show program version
+.IP "-g, --gen-password <length>"
+Generate password
+.IP "-q, --quick <search>"
+This is the same as running
+--show-passwords -f
+.IP "-h, --help"
+Show short help and exit
+.SH FLAGS
+.IP "--auto-encrypt"
+Automatically encrypt after exit
+.IP "--show-passwords"
+Show passwords in listings
+.IP "--force"
+--force only works with --init option
+.SH EXAMPLES
+Create a new database:
+       ylva --init "/path/to/file.db"
+.PP
+Open and decrypt database:
+       ylva --decrypt "/path/to/existing/file.db"
+.PP
+Close and encrypt database:
+       ylva --encrypt
+
+Ylva knows what database is currently active and encrypts it.
+Encrypting will ask you to type a master passphrase which is used for encryption.
+.PP
+Add an entry to an open database:
+       ylva --add
+.PP
+If you want to export all entries to a file:
+       ylva --show-passwords -A > file.txt
+.PP
+To show latest 10 entries:
+       ylva --show-latest 10
+.SH COLORS
+Ylva supports colored output. To use colors, set an environment variable
+YLVA_COLOR with one of the following value:
+BLUE, RED, GREEN, YELLOW, MAGENTA, CYAN or WHITE.
+.SH NOTES
+Ylva does not have a concept of "change the master password". When you encrypt
+an open database using --encrypt you can type a master password. This password
+is then  required to decrypt the database. You can change the master password
+everytime when you encrypt the database, if you want to.
+
+Directory encryption is not recursive, this will change in the future versions.
+.SH FILES
+.I $HOME/.ylva.lock
+.SH AUTHORS
+Written by Niko Rosvall.
+.SH COPYRIGHT
+Copyright (C) 2019 Niko Rosvall <niko@byteptr.com>
+.PP
+Released under MIT license.
