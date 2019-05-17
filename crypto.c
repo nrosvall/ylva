@@ -50,7 +50,7 @@ static Key_t generate_key(const char *passphrase, char *old_salt,
                           bool *ok)
 {
     char *salt = NULL;
-    int iterations = 25000;
+    int iterations = 200000;
     Key_t key = { {0} };
     int success;
     char *resultbytes[KEY_SIZE];
