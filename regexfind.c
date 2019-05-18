@@ -23,7 +23,6 @@ void regex_find(Entry_t *head, const char *search, int show_password)
         return;
     }
 
-    /* Currently regex only searches for the title field */
     while(head != NULL)
     {
         if((retval = regexec(&regex, head->title, 0, NULL, 0)) == 0)
