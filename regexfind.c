@@ -26,13 +26,16 @@ void regex_find(Entry_t *head, const char *search, int show_password)
     /* Currently regex only searches for the title field */
     while(head != NULL)
     {
-        retval = regexec(&regex, head->title, 0, NULL, 0);
-
-        if(retval == 0)
-        {
-            /* We have a match */
+        if((retval = regexec(&regex, head->title, 0, NULL, 0)) == 0)
             print_entry(head, show_password);
-        }
+        else if((retval = regexec(&regex, head->user, 0, NULL, 0)) == 0)
+            print_entry(head, show_password);
+        else if((retval = regexec(&regex, head->url, 0, NULL, 0)) == 0)
+            print_entry(head, show_password);
+        else if((retval = regexec(&regex, head->notes, 0, NULL, 0)) == 0)
+            print_entry(head, show_password);
+        else if((retval = regexec(&regex, head->stamp, 0, NULL, 0)) == 0)
+            print_entry(head, show_password);
 
         head = head->next;
     }
