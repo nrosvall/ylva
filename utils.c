@@ -216,3 +216,9 @@ void *tmalloc(size_t size)
 
     return data;
 }
+
+void set_file_owner_rw(const char *path)
+{
+    if(chmod(path, S_IRUSR | S_IWUSR) != 0)
+        fprintf(stderr, "WARNING: Error changing permissions of file %s\n", path);
+}

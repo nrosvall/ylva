@@ -87,6 +87,7 @@ bool db_init_new(const char *path)
     }
 
     sqlite3_close(db);
+    set_file_owner_rw(path);
 
     return true;
 }

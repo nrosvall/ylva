@@ -489,8 +489,10 @@ bool decrypt_file(const char *passphrase, const char *path)
 
     //And rename our ciphered file back to the original name
     rename(output_filename, path);
-    free(output_filename);
 
+    set_file_owner_rw(path);
+
+    free(output_filename);
     free(iv);
     free(salt);
     fclose(plain);
