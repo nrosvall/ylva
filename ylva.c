@@ -160,8 +160,12 @@ int main(int argc, char *argv[])
             version();
             break;
         case 'g':
-            generate_password(atoi(optarg));
+        {
+            char *pass = generate_password(atoi(optarg));
+            if(pass != NULL)
+                free(pass);
             break;
+        }
         case 'q':
             show_password = 1;
             find(optarg, show_password, auto_encrypt);
