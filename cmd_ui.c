@@ -167,7 +167,7 @@ bool encrypt_database()
     char pass2[pwdlen];
     char *ptr2 = pass2;
     char *path = NULL;
-    char *lockfile_path = NULL;
+    char *open_db_holder_path = NULL;
 
     path = read_active_database_path();
 
@@ -196,18 +196,18 @@ bool encrypt_database()
 
     free(path);
 
-    lockfile_path = get_lockfile_path();
+    open_db_holder_path = get_open_db_path_holder_filepath();
 
-    if(!lockfile_path)
+    if(!open_db_holder_path)
     {
-        fprintf(stderr, "Unable to retrieve the lock file path.\n");
+        fprintf(stderr, "Unable to retrieve the ylva.open_db file path.\n");
         return false;
     }
 
     //Finally delete the file that holds the activate database path.
     //This way we allow Ylva to create a new database or open another one.
-    unlink(lockfile_path);
-    free(lockfile_path);
+    unlink(open_db_holder_path);
+    free(open_db_holder_path);
 
     return true;
 }

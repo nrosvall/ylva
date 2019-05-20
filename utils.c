@@ -81,14 +81,14 @@ bool file_exists(const char *path)
 }
 
 /* Function checks that we have a valid path
- * in our lock file and if the database is not
+ * in our ylva.open_db file and if the database is not
  * encrypted.
  */
 bool has_active_database()
 {
     char *path = NULL;
 
-    path = get_lockfile_path();
+    path = get_open_db_path_holder_filepath();
 
     if(!path)
         return false;
@@ -113,9 +113,9 @@ bool has_active_database()
     return true;
 }
 
-/* Returns the path of ~/.ylva.lock file.
+/* Returns the path of ~/.ylva.open_db file.
  * Caller must free the return value */
-char *get_lockfile_path()
+char *get_open_db_path_holder_filepath()
 {
     char *home = NULL;
     char *path = NULL;
@@ -125,11 +125,11 @@ char *get_lockfile_path()
     if(!home)
         return NULL;
 
-    /* /home/user/.ylva.lock */
-    path = tmalloc(sizeof(char) * (strlen(home) + 13));
+    /* /home/user/.ylva.open_db */
+    path = tmalloc(sizeof(char) * (strlen(home) + 15));
 
     strcpy(path, home);
-    strcat(path, "/.ylva.lock");
+    strcat(path, "/.ylva.open_db");
 
     return path;
 }
@@ -140,10 +140,10 @@ char *read_active_database_path()
 {
     FILE *fp = NULL;
     char *path = NULL;
-    char *lockpath = NULL;
+    char *opendbholderpath = NULL;
     size_t len;
 
-    path = get_lockfile_path();
+    path = get_open_db_path_holder_filepath();
 
     if(!path)
         return NULL;
@@ -158,10 +158,10 @@ char *read_active_database_path()
 
     /* We only need the first line from the file */
 
-    if(getline(&lockpath, &len, fp) < 0)
+    if(getline(&opendbholderpath, &len, fp) < 0)
     {
-        if(lockpath)
-            free(lockpath);
+        if(opendbholderpath)
+            free(opendbholderpath);
 
         fclose(fp);
         free(path);
@@ -172,7 +172,7 @@ char *read_active_database_path()
     fclose(fp);
     free(path);
 
-    return lockpath;
+    return opendbholderpath;
 }
 
 void write_active_database_path(const char *db_path)
@@ -180,7 +180,7 @@ void write_active_database_path(const char *db_path)
     FILE *fp = NULL;
     char *path = NULL;
 
-    path = get_lockfile_path();
+    path = get_open_db_path_holder_filepath();
 
     if(!path)
         return;
@@ -189,7 +189,7 @@ void write_active_database_path(const char *db_path)
 
     if(!fp)
     {
-        fprintf(stderr, "Error creating lock file\n");
+        fprintf(stderr, "Error creating ~/.ylva.open_db file\n");
         free(path);
         return;
     }
