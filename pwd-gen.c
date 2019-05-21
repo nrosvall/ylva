@@ -58,6 +58,11 @@ char *generate_password(int length)
     unsigned int max;
     unsigned int number;
 
+    RAND_poll();
+
+    if(RAND_status() != 1)
+        fprintf(stdout, "Warning, random number generator not seeded.\n");
+
     max = strlen(alpha) - 1;
     pass = tmalloc((length + 1) * sizeof(char));
 
