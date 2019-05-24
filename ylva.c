@@ -17,7 +17,7 @@ static int show_password = 0;
 static int force = 0;
 static int auto_encrypt = 0;
 
-static double v = 1.4;
+static double v = 1.5;
 
 static void version()
 {
@@ -37,7 +37,7 @@ OPTIONS\n\
     -e --encrypt                      Encrypt the current password database\n\
     -d --decrypt             <path>   Decrypt password database\n\
     -a --add                          Add new entry\n\
-    -D --duplicate                    Duplicate an entry\n\
+    -D --duplicate           <id>     Duplicate an entry\n\
     -s --show-db-path                 Show current database path\n\
     -u --use-db              <path>   Switch using another database\n\
     -r --remove              <id>     Remove entry pointed by id\n\
