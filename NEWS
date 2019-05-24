@@ -1,3 +1,10 @@
+Release 1.5 (2019-05-24)
+        Password generator now uses RAND_bytes from OpenSSL
+        Regex search can now search all the entry fields
+        Minor memory leak fixed
+        Entries can now be duplicated with -D, --duplicate
+        Decrypted database is now only readable by the owner
+
 Release 1.4 (2019-05-18)
         *Titan is now Ylva
         *Ylva no longer supports encrypting individual files or directories, it's not a job for a password manager.
