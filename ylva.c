@@ -37,6 +37,7 @@ OPTIONS\n\
     -e --encrypt                      Encrypt the current password database\n\
     -d --decrypt             <path>   Decrypt password database\n\
     -a --add                          Add new entry\n\
+    -D --duplicate                    Duplicate an entry\n\
     -s --show-db-path                 Show current database path\n\
     -u --use-db              <path>   Switch using another database\n\
     -r --remove              <id>     Remove entry pointed by id\n\
@@ -86,6 +87,7 @@ int main(int argc, char *argv[])
             {"decrypt",               required_argument, 0, 'd'},
             {"encrypt",               no_argument,       0, 'e'},
             {"add",                   no_argument,       0, 'a'},
+            {"duplicate",             required_argument, 0, 'D'},
             {"remove",                required_argument, 0, 'r'},
             {"find",                  required_argument, 0, 'f'},
             {"regex",                 required_argument, 0, 'F'},
@@ -107,7 +109,7 @@ int main(int argc, char *argv[])
 
         int option_index = 0;
 
-        c = getopt_long(argc, argv, "i:d:ear:f:F:c:l:Asu:hVg:q:t:",
+        c = getopt_long(argc, argv, "i:d:ear:f:D:F:c:l:Asu:hVg:q:t:",
                         long_options, &option_index);
 
         if(c == -1)
@@ -129,6 +131,9 @@ int main(int argc, char *argv[])
             break;
         case 'a':
             add_new_entry(auto_encrypt);
+            break;
+        case 'D':
+            duplicate_entry(atoi(optarg));
             break;
         case 's':
             show_current_db_path();

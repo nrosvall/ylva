@@ -358,6 +358,40 @@ bool edit_entry(int id, int auto_encrypt)
     return true;
 }
 
+bool duplicate_entry(int id)
+{
+    if(!has_active_database())
+    {
+        fprintf(stderr, "No decrypted database found.\n");
+        return false;
+    }
+
+    Entry_t *old = db_get_entry_by_id(id);
+
+    if(!old)
+        return false;;
+
+    if(old->id == -1)
+    {
+        printf("Nothing found with id %d.\n", id);
+        free(old);
+        return false;
+    }
+
+    Entry_t *new = entry_dup(old);
+
+    if(!db_insert_entry(new))
+    {
+        fprintf(stderr, "Failed to add a new entry.\n");
+        return false;
+    }
+
+    free(old);
+    free(new);
+
+    return true;
+}
+
 bool remove_entry(int id, int auto_encrypt)
 {
     if(!has_active_database())

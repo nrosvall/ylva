@@ -54,6 +54,15 @@ Entry_t *entry_add(Entry_t *head, const char *title, const char *user,
     return cur->next;
 }
 
+Entry_t *entry_dup(Entry_t *entry)
+{
+    Entry_t *new;
+
+    new = entry_new(entry->title, entry->user, entry->url,
+                    entry->password, entry->notes);
+    return new;
+}
+
 void entry_free(Entry_t *entry)
 {
     Entry_t *tmp;

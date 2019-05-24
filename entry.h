@@ -23,6 +23,7 @@ Entry_t *entry_new(const char *title, const char *user, const char *url,
                    const char *password, const char *notes);
 Entry_t *entry_add(Entry_t *head, const char *title, const char *user,
                    const char *url, const char *password, const char *notes);
+Entry_t *entry_dup(Entry_t *entry);
 void entry_free(Entry_t *entry);
 
 #endif
