@@ -20,13 +20,17 @@ clean:
 	rm -f *.o
 	rm -f $(PROG)
 
+DESTBINDIR = $(DESTDIR)$(PREFIX)/bin
 install: all
 	if [ ! -d $(DESTDIR)$(MANDIR)/man1 ];then	\
 		mkdir -p $(DESTDIR)$(MANDIR)/man1;	\
 	fi
 	cp ylva.1 $(DESTDIR)$(MANDIR)/man1/
 	gzip -f $(DESTDIR)$(MANDIR)/man1/ylva.1
-	cp ylva $(DESTDIR)$(PREFIX)/bin/
+	if [ ! -d $(DESTBINDIR) ] ; then \
+		mkdir -p $(DESTBINDIR) ; \
+	fi
+	cp ylva $(DESTBINDIR)/
 
 uninstall:
 	rm $(PREFIX)/bin/ylva
