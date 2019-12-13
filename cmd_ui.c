@@ -358,7 +358,7 @@ bool edit_entry(int id, int auto_encrypt)
     return true;
 }
 
-bool duplicate_entry(int id)
+bool copy_entry(int id)
 {
     if(!has_active_database())
     {
