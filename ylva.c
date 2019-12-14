@@ -17,7 +17,7 @@ static int show_password = 0;
 static int force = 0;
 static int auto_encrypt = 0;
 
-static double v = 1.5;
+static double v = 1.6;
 
 static void version()
 {
@@ -34,16 +34,16 @@ SYNOPSIS\n\
 OPTIONS\n\
 \n\
     -i --init                <path>   Initialize new database\n\
-    -e --encrypt                      Encrypt the current password database\n\
-    -d --decrypt             <path>   Decrypt password database\n\
+    -E --encrypt                      Encrypt the current password database\n\
+    -D --decrypt             <path>   Decrypt password database\n\
     -a --add                          Add new entry\n\
-    -D --duplicate           <id>     Duplicate an entry\n\
+    -c --copy                <id>     Copy an entry\n\
+    -r --remove              <id>     Remove entry pointed by id\n\
     -s --show-db-path                 Show current database path\n\
     -u --use-db              <path>   Switch using another database\n\
-    -r --remove              <id>     Remove entry pointed by id\n\
     -f --find                <search> Search entries\n\
     -F --regex               <search> Search entries with regular expressions\n\
-    -c --edit                <id>     Edit entry pointed by id\n\
+    -e --edit                <id>     Edit entry pointed by id\n\
     -l --list-entry          <id>     List entry pointed by id\n\
     -t --show-latest         <count>  Show latest <count> entries\n\
     -A --list-all                     List all entries\n\
@@ -52,7 +52,7 @@ OPTIONS\n\
     -q --quick               <search> This is the same as running\n\
                                       --show-passwords -f\n\
 \n\
-    -V --version                      Show version number of program\n\
+    -v --version                      Show version number of program\n\
 \n\
 FLAGS\n\
 \n\
@@ -83,33 +83,33 @@ int main(int argc, char *argv[])
     {
         static struct option long_options[] =
         {
-            {"init",                  required_argument, 0, 'i'},
-            {"decrypt",               required_argument, 0, 'd'},
-            {"encrypt",               no_argument,       0, 'e'},
-            {"add",                   no_argument,       0, 'a'},
-            {"duplicate",             required_argument, 0, 'D'},
-            {"remove",                required_argument, 0, 'r'},
-            {"find",                  required_argument, 0, 'f'},
-            {"regex",                 required_argument, 0, 'F'},
-            {"edit",                  required_argument, 0, 'c'},
-            {"list-entry",            required_argument, 0, 'l'},
-            {"use-db",                required_argument, 0, 'u'},
-            {"list-all",              no_argument,       0, 'A'},
-            {"help",                  no_argument,       0, 'h'},
-            {"version",               no_argument,       0, 'V'},
-            {"show-db-path",          no_argument,       0, 's'},
-            {"gen-password",          required_argument, 0, 'g'},
-            {"quick",                 required_argument, 0, 'q'},
-            {"show-latest",           required_argument, 0, 't'},
-            {"auto-encrypt",          no_argument,       &auto_encrypt,  1},
-            {"show-passwords",        no_argument,       &show_password, 1},
-            {"force",                 no_argument,       &force, 1},
+            {"init",                  required_argument, 0,             'i'},
+            {"encrypt",               no_argument,       0,             'E'},
+            {"decrypt",               required_argument, 0,             'D'},
+            {"use-db",                required_argument, 0,             'u'},
+            {"add",                   no_argument,       0,             'a'},
+            {"copy",                  required_argument, 0,             'c'},
+            {"remove",                required_argument, 0,             'r'},
+            {"find",                  required_argument, 0,             'f'},
+            {"regex",                 required_argument, 0,             'F'},
+            {"edit",                  required_argument, 0,             'e'},
+            {"list-all",              no_argument,       0,             'A'},
+            {"list-entry",            required_argument, 0,             'l'},
+            {"gen-password",          required_argument, 0,             'g'},
+            {"help",                  no_argument,       0,             'h'},
+            {"version",               no_argument,       0,             'v'},
+            {"show-db-path",          no_argument,       0,             'p'},
+            {"show-latest",           required_argument, 0,             't'},
+            {"quick",                 required_argument, 0,             'q'},
+            {"auto-encrypt",          no_argument,       &auto_encrypt,  1 },
+            {"show-passwords",        no_argument,       &show_password, 1 },
+            {"force",                 no_argument,       &force,         1 },
             {0, 0, 0, 0}
         };
 
         int option_index = 0;
 
-        c = getopt_long(argc, argv, "i:d:ear:f:D:F:c:l:Asu:hVg:q:t:",
+        c = getopt_long(argc, argv, "i:ED:u:ac:r:f:F:e:Al:g:hvpt:q:",
                         long_options, &option_index);
 
         if(c == -1)
@@ -123,46 +123,37 @@ int main(int argc, char *argv[])
         case 'i':
             init_database(optarg, force, auto_encrypt);
             break;
-        case 'd': //decrypt
-            decrypt_database(optarg);
-            break;
-        case 'e': //encrypt
+        case 'E': //encrypt
             encrypt_database();
             break;
+        case 'D': //decrypt
+            decrypt_database(optarg);
+            break;
+        case 'u':
+            set_use_db(optarg);
         case 'a':
             add_new_entry(auto_encrypt);
             break;
-        case 'D':
-            duplicate_entry(atoi(optarg));
-            break;
-        case 's':
-            show_current_db_path();
-            break;
-        case 'h':
-            usage();
+        case 'c':
+            copy_entry(atoi(optarg));
             break;
         case 'r':
             remove_entry(atoi(optarg), auto_encrypt);
             break;
-        case 'u':
-            set_use_db(optarg);
         case 'f':
             find(optarg, show_password, auto_encrypt);
             break;
         case 'F':
             find_regex(optarg, show_password);
             break;
-        case 'c':
+        case 'e':
             edit_entry(atoi(optarg), auto_encrypt);
-            break;
-        case 'l':
-            list_by_id(atoi(optarg), show_password, auto_encrypt);
             break;
         case 'A':
             list_all(show_password, auto_encrypt, -1);
             break;
-        case 'V':
-            version();
+        case 'l':
+            list_by_id(atoi(optarg), show_password, auto_encrypt);
             break;
         case 'g':
         {
@@ -171,18 +162,26 @@ int main(int argc, char *argv[])
                 free(pass);
             break;
         }
-        case 'q':
-            show_password = 1;
-            find(optarg, show_password, auto_encrypt);
+        case 'h':
+            usage();
+            break;
+        case 'v':
+            version();
+            break;
+        case 'p':
+            show_current_db_path();
             break;
         case 't':
             show_latest_entries(show_password, auto_encrypt, atoi(optarg));
+            break;
+        case 'q':
+            show_password = 1;
+            find(optarg, show_password, auto_encrypt);
             break;
         case '?':
             usage();
             break;
         }
     }
-
     return 0;
 }
