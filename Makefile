@@ -25,12 +25,12 @@ install: all
 	if [ ! -d $(DESTDIR)$(MANDIR)/man1 ];then	\
 		mkdir -p $(DESTDIR)$(MANDIR)/man1;	\
 	fi
-	cp ylva.1 $(DESTDIR)$(MANDIR)/man1/
+	install -m644 ylva.1 $(DESTDIR)$(MANDIR)/man1/
 	gzip -f $(DESTDIR)$(MANDIR)/man1/ylva.1
 	if [ ! -d $(DESTBINDIR) ] ; then \
 		mkdir -p $(DESTBINDIR) ; \
 	fi
-	cp ylva $(DESTBINDIR)/
+	install -m755 ylva $(DESTBINDIR)/
 
 uninstall:
 	rm $(PREFIX)/bin/ylva
