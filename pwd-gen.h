@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Niko Rosvall <niko@byteptr.com>
+ * Copyright (C) 2019-2020 Niko Rosvall <niko@byteptr.com>
  */
 
 #ifndef __PWD_GEN_H

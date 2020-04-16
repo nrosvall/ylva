@@ -1,3 +1,10 @@
+Release 1.6 (2020-04-17)
+        Some changes to command line switches
+        Fixing typos in the manual
+        Makefile fixes
+        Minor code refactoring
+        Very stable long term release
+
 Release 1.5 (2019-05-24)
         Password generator now uses RAND_bytes from OpenSSL
         Regex search can now search all the entry fields

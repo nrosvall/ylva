@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Niko Rosvall <niko@byteptr.com>
+ * Copyright (C) 2019-2020 Niko Rosvall <niko@byteptr.com>
  */
 
 #include <stdio.h>
@@ -39,7 +39,7 @@ OPTIONS\n\
     -a --add                          Add new entry\n\
     -c --copy                <id>     Copy an entry\n\
     -r --remove              <id>     Remove entry pointed by id\n\
-    -s --show-db-path                 Show current database path\n\
+    -p --show-db-path                 Show current database path\n\
     -u --use-db              <path>   Switch using another database\n\
     -f --find                <search> Search entries\n\
     -F --regex               <search> Search entries with regular expressions\n\
@@ -64,7 +64,7 @@ FLAGS\n\
 For more information and examples see man ylva(1).\n\
 \n\
 AUTHORS\n\
-    Copyright (C) 2019 Niko Rosvall <niko@byteptr.com>\n\
+    Copyright (C) 2019-2020 Niko Rosvall <niko@byteptr.com>\n\
 "
     printf(HELP);
 }
