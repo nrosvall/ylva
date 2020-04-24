@@ -6,3 +6,7 @@ Titan.vcxproj*
 bin/
 obj/
 *.html
+.editorconfig
+Ylva.sln
+Ylva.vcxproj
+Ylva.vcxproj.user
