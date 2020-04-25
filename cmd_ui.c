@@ -42,7 +42,7 @@ static void strip_newline_str(char *str)
 static void generate_new_password(char *in_buffer)
 {
     char *new_pass = NULL;
-    new_pass = generate_password(16);
+    new_pass = generate_password(20);
 
     if(!new_pass)
     {
