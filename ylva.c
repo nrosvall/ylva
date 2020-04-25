@@ -17,7 +17,7 @@ static int show_password = 0;
 static int force = 0;
 static int auto_encrypt = 0;
 
-static double v = 1.6;
+static double v = 1.7;
 
 static void version()
 {
