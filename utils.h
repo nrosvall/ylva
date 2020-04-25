@@ -17,5 +17,6 @@ bool has_active_database();
 void *tmalloc(size_t size);
 void set_file_owner_rw(const char *path);
 bool file_exists(const char *path);
+char* get_default_username();
 
 #endif

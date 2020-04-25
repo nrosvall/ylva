@@ -35,7 +35,9 @@ static void strip_newline_str(char *str)
     *i = '\0';
 }
 
-/* Function assumes that the in_buffer has enough space.
+/* Function assumes that the in_buffer has enough space. This
+ * function is only used when user wants to create a new entry
+ * Length is hard coded to keep things simple.
  */
 static void generate_new_password(char *in_buffer)
 {
@@ -223,6 +225,7 @@ bool add_new_entry(int auto_encrypt)
 
     char title[1024] = {0};
     char user[1024] = {0};
+    char* user_default = NULL;
     char url[1024] = {0};
     char notes[1024] = {0};
     size_t pwdlen = 1024;
@@ -231,8 +234,16 @@ bool add_new_entry(int auto_encrypt)
 
     fprintf(stdout, "Title: ");
     fgets(title, 1024, stdin);
-    fprintf(stdout, "Username: ");
-    fgets(user, 1024, stdin);
+
+    user_default = get_default_username();
+    if (user_default == NULL) {
+        fprintf(stdout, "Username: ");
+        fgets(user, 1024, stdin);
+    }
+    else {
+        snprintf(user, 1024, "%s", user_default);
+    }
+    
     fprintf(stdout, "Url: ");
     fgets(url, 1024, stdin);
     fprintf(stdout, "Notes: ");

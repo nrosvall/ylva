@@ -15,6 +15,15 @@
 
 #define COLOR_DEFAULT "\x1B[0m"
 
+/* Function returns NULL if the environment variable
+   YLVA_DEFAULT_USER is not set.
+ */
+char* get_default_username()
+{
+    char* username = getenv("YLVA_DEFAULT_USER");
+    return username;
+}
+
 static char *get_output_color()
 {
     char *color = getenv("YLVA_COLOR");
