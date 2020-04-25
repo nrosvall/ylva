@@ -295,7 +295,7 @@ bool edit_entry(int id, int auto_encrypt)
     if(entry->id == -1)
     {
         printf("Nothing found.\n");
-        free(entry);
+        entry_free(entry);
         return false;
     }
 
@@ -324,31 +324,41 @@ bool edit_entry(int id, int auto_encrypt)
     my_getpass("New password (empty to generate new): ", &ptr, &pwdlen,
             stdin);
 
-    if(strcmp(pass, "") == 0)
+    if (strcmp(pass, "") == 0) {
         generate_new_password(pass);
+    }
 
     strip_newline_str(title);
     strip_newline_str(user);
     strip_newline_str(url);
     strip_newline_str(notes);
 
+    //We need to manually free the entry field to avoid dublicate allocation
+    //caused by the database query. Password field will be always allocated, other
+    //are freed if necessary below
+    free(entry->password);
+
     if(title[0] != '\0')
     {
+        free(entry->title);
         entry->title = strdup(title);
         update = true;
     }
     if(user[0] != '\0')
     {
+        free(entry->user);
         entry->user = strdup(user);
         update = true;
     }
     if(url[0] != '\0')
     {
+        free(entry->url);
         entry->url = strdup(url);
         update = true;
     }
     if(notes[0] != '\0')
     {
+        free(entry->notes);
         entry->notes = strdup(notes);
         update = true;
     }
@@ -385,7 +395,7 @@ bool copy_entry(int id)
     if(old->id == -1)
     {
         printf("Nothing found with id %d.\n", id);
-        free(old);
+        entry_free(old);
         return false;
     }
 
@@ -393,12 +403,14 @@ bool copy_entry(int id)
 
     if(!db_insert_entry(new))
     {
+        entry_free(old);
+        entry_free(new);
         fprintf(stderr, "Failed to add a new entry.\n");
         return false;
     }
 
-    free(old);
-    free(new);
+    entry_free(old);
+    entry_free(new);
 
     return true;
 }
@@ -445,7 +457,7 @@ void list_by_id(int id, int show_password, int auto_encrypt)
     if(entry->id == -1)
     {
         printf("Nothing found with id %d.\n", id);
-        free(entry);
+        entry_free(entry);
         return;
     }
 

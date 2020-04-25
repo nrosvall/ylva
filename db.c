@@ -252,7 +252,7 @@ Entry_t *db_get_entry_by_id(int id)
     }
 
     entry = tmalloc(sizeof(struct _entry));
-
+   
     query = sqlite3_mprintf("select id,title,user,url,password,notes,"
                             "timestamp from entries where id=%d;", id);
 
@@ -519,20 +519,27 @@ static int cb_find(void *entry, int argc, char **argv, char **column_name)
 static int cb_get_by_id(void *entry, int argc, char **argv, char **column_name)
 {
     /*Let's not allow NULLs*/
-    if(argv[0] == NULL)
+    if (argv[0] == NULL) {
         return 1;
-    if(argv[1] == NULL)
+    }
+    if (argv[1] == NULL) {
         return 1;
-    if(argv[2] == NULL)
+    }
+    if (argv[2] == NULL) {
         return 1;
-    if(argv[3] == NULL)
+    }
+    if (argv[3] == NULL) {
         return 1;
-    if(argv[4] == NULL)
+    }
+    if (argv[4] == NULL) {
         return 1;
-    if(argv[5] == NULL)
+    }
+    if (argv[5] == NULL) {
         return 1;
-    if(argv[6] == NULL)
+    }
+    if (argv[6] == NULL) {
         return 1;
+    }
 
     ((Entry_t *)entry)->id = atoi(argv[0]);
     ((Entry_t *)entry)->title = strdup(argv[1]);
@@ -542,6 +549,8 @@ static int cb_get_by_id(void *entry, int argc, char **argv, char **column_name)
     ((Entry_t *)entry)->notes = strdup(argv[5]);
     ((Entry_t *)entry)->stamp = strdup(argv[6]);
     ((Entry_t *)entry)->next = NULL;
+
+    
 
     return 0;
 }

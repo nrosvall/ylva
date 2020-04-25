@@ -14,6 +14,7 @@ typedef struct _entry
     char *password;
     char *notes;
     char *stamp;
+
     struct _entry *next;
 
 } Entry_t;
