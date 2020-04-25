@@ -33,6 +33,13 @@ Entry_t *entry_new(const char *title, const char *user,
     return new;
 }
 
+Entry_t* entry_new_empty()
+{
+    Entry_t* new = NULL;
+    new = tmalloc(sizeof(struct _entry));
+    return new;
+}
+
 /* Add new entry to the end of the list. Returns the currently added entry */
 Entry_t *entry_add(Entry_t *head, const char *title, const char *user,
                    const char *url, const char *password, const char *notes)

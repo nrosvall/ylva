@@ -251,7 +251,7 @@ Entry_t *db_get_entry_by_id(int id)
         return NULL;
     }
 
-    entry = tmalloc(sizeof(struct _entry));
+    entry = entry_new_empty();
    
     query = sqlite3_mprintf("select id,title,user,url,password,notes,"
                             "timestamp from entries where id=%d;", id);

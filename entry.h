@@ -22,6 +22,9 @@ typedef struct _entry
 
 Entry_t *entry_new(const char *title, const char *user, const char *url,
                    const char *password, const char *notes);
+
+Entry_t* entry_new_empty();
+
 Entry_t *entry_add(Entry_t *head, const char *title, const char *user,
                    const char *url, const char *password, const char *notes);
 Entry_t *entry_dup(Entry_t *entry);
