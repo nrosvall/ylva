@@ -33,7 +33,7 @@ static unsigned int rand_between(unsigned int min, unsigned int max)
         if(RAND_bytes((unsigned char *)&r, sizeof r) == 0)
         {
             ERR_print_errors_fp(stderr);
-            return -1;
+            abort();
         }
 
     } while (r >= limit);
