@@ -1,6 +1,6 @@
 CC?=gcc
 CFLAGS?=-g
-CFLAGS+=-std=c99 -Wall
+CFLAGS+=-std=c11 -Wall
 PREFIX?=/usr/
 MANDIR?=$(PREFIX)/share/man
 LIBS=-lcrypto -lsqlite3 -lrt
