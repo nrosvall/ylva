@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include <getopt.h>
 #include "cmd_ui.h"
 #include "entry.h"
@@ -45,7 +46,7 @@ OPTIONS\n\
     -F --regex               <search> Search entries with regular expressions\n\
     -e --edit                <id>     Edit entry pointed by id\n\
     -l --list-entry          <id>     List entry pointed by id\n\
-    -t --show-latest         <count>  Show latest <count> entries\n\
+    -t --show-latest         [count]  Show latest entries, count is optional\n\
     -A --list-all                     List all entries\n\
     -h --help                         Show short help and exit. This page\n\
     -g --gen-password        <length> Generate password\n\
@@ -99,7 +100,7 @@ int main(int argc, char *argv[])
             {"help",                  no_argument,       0,             'h'},
             {"version",               no_argument,       0,             'v'},
             {"show-db-path",          no_argument,       0,             'p'},
-            {"show-latest",           required_argument, 0,             't'},
+            {"show-latest",           no_argument,       0,             't'},
             {"quick",                 required_argument, 0,             'q'},
             {"auto-encrypt",          no_argument,       &auto_encrypt,  1 },
             {"show-passwords",        no_argument,       &show_password, 1 },
@@ -109,7 +110,7 @@ int main(int argc, char *argv[])
 
         int option_index = 0;
 
-        c = getopt_long(argc, argv, "i:ED:u:ac:r:f:F:e:Al:g:hvpt:q:",
+        c = getopt_long(argc, argv, "i:ED:u:ac:r:f:F:e:Al:g:hvptq:",
                         long_options, &option_index);
 
         if(c == -1)
@@ -171,9 +172,15 @@ int main(int argc, char *argv[])
         case 'p':
             show_current_db_path();
             break;
-        case 't':
-            show_latest_entries(show_password, auto_encrypt, atoi(optarg));
+        case 't': 
+        {
+            int count = -2;
+            if(argv[optind]) {
+                count = atoi(argv[optind]);
+            }
+            show_latest_entries(show_password, auto_encrypt, count);
             break;
+        }
         case 'q':
             show_password = 1;
             find(optarg, show_password, auto_encrypt);

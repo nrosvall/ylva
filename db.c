@@ -347,7 +347,7 @@ bool db_delete_entry(int id, bool *changes)
 }
 
 /* Get latest count of entries pointed by count_latest.
- * -1 to get everything.
+ * -1 to get everything. -2 to get everything ordered by date
  */
 Entry_t *db_get_list(int count_latest)
 {
@@ -356,7 +356,7 @@ Entry_t *db_get_list(int count_latest)
     sqlite3 *db;
     char *query = NULL;
 
-    if(count_latest < 0 && count_latest != -1)
+    if(count_latest < 0 && count_latest != -1 && count_latest != -2)
     {
         fprintf(stderr, "Invalid parameter <count>\n");
         return NULL;
@@ -395,6 +395,8 @@ Entry_t *db_get_list(int count_latest)
     /* Get all data or a defined count */
     if(count_latest == -1)
         query = "select * from entries;";
+    else if(count_latest == -2)
+        query = sqlite3_mprintf("select * from entries order by datetime(timestamp) desc");
     else
         query = sqlite3_mprintf("select * from entries order by datetime(timestamp) desc limit %d", count_latest);
 

@@ -35,8 +35,8 @@ Search for entries with regular expressions
 Edit entry pointed by id
 .IP "-l, --list-entry <id>"
 List entry pointed by id
-.IP "-t, --show-latest <count>"
-Show latest entries
+.IP "-t, --show-latest [count]"
+Show latest entries, parameter count is optional.
 .IP "-A, --list-all"
 Show database statuses
 .IP "-v, --version"
@@ -76,6 +76,9 @@ If you want to export all entries to a file:
 .PP
 To show latest 10 entries:
        ylva --show-latest 10
+.PP
+To show all entries ordered by date
+       ylva --show-latest
 .SH COLORS
 Ylva supports colored output. To use colors, set an environment variable
 YLVA_COLOR with one of the following value:
