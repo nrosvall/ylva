@@ -20,7 +20,7 @@
  */
 char* get_default_username()
 {
-    char* username = getenv("YLVA_DEFAULT_USER");
+    char* username = getenv("YLVA_DEFAULT_USERNAME");
     return username;
 }
 

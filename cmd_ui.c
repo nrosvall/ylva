@@ -236,11 +236,13 @@ bool add_new_entry(int auto_encrypt)
     fgets(title, 1024, stdin);
 
     user_default = get_default_username();
+
     if (user_default == NULL) {
         fprintf(stdout, "Username: ");
         fgets(user, 1024, stdin);
     }
     else {
+        fprintf(stdout, "Username: using default (%s)\n", user_default);
         snprintf(user, 1024, "%s", user_default);
     }
     

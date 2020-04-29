@@ -85,7 +85,10 @@ YLVA_COLOR with one of the following value:
 BLUE, RED, GREEN, YELLOW, MAGENTA, CYAN or WHITE.
 .SH DEFAULT USERNAME
 Ylva supports settings default username for entries. To enable it, set
-an environment variable YLVA_DEFAULT_USER value to the wanted default.
+an environment variable 
+YLVA_DEFAULT_USERNAME value to the wanted default.
+If you want Ylva to default to an 
+empty username define YLVA_DEFAULT_USERNAME, but leave it empty.
 .SH NOTES
 Ylva does not have a concept of "change the master password". When you encrypt
 an open database using --encrypt you can type a master password. This password
