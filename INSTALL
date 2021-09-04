@@ -1,0 +1,23 @@
+Installing Ylva is easy. Ready made packages are available for example on Debian stable. 
+If you're running Debian or Ubuntu (21.04 or later) you can simply install Ylva with command
+sudo apt install ylva.
+
+There are also package in FreeBSD ports, I don't use FreeBSD so I don't know how to install ylva
+from the ports. It's probably very easy.
+
+Please note, that packages might not give you the latest stable version of Ylva.
+
+How to install Ylva from the source code?
+
+You need development libraries for Sqlite, OpenSSL and libqrcodegen. You will also need 
+a modern C compiler and GNU Make.
+
+On Fedora:
+
+sudo dnf install sqlite-devel openssl-devel libqrcodegen-devel
+cd into Ylva source directory and type commands:
+
+make
+sudo make install
+
+Now you should be able to start Ylva by typing ylva in your terminal.
