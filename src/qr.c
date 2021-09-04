@@ -54,6 +54,8 @@ void print_entry_as_qr(Entry_t *entry)
             entry->user, entry->url, entry->password, entry->notes) ) < 0 ) {
 
             fprintf(stderr, "Unable to combine entry data.\n");
+            free(data);
+            return;
     }
 
     bool ok = qrcodegen_encodeText(data, tmp_buffer, qrcode, error_level,
