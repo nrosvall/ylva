@@ -60,14 +60,14 @@ FLAGS\n\
 \n\
     --auto-encrypt                    Automatically encrypt after exit\n\
     --show-passwords                  Show passwords in listings\n\
-    --show-qrcode                     Show password as QR code in --list-entry\n\
+    --show-qrcode                     Show data as QR code in --list-entry\n\
     --force                           Ignore everything and force operation\n\
                                       --force only works with --init option\n\
 \n\
 For more information and examples see man ylva(1).\n\
 \n\
 AUTHORS\n\
-    Copyright (C) 2019-2020 Niko Rosvall <niko@byteptr.com>\n\
+    Copyright (C) 2019-2021 Niko Rosvall <niko@byteptr.com>\n\
 "
     printf(HELP);
 }
