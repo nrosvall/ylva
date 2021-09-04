@@ -14,8 +14,6 @@
 #include "crypto.h"
 #include "qr.h"
 
-#define COLOR_DEFAULT "\x1B[0m"
-
 /* Function returns NULL if the environment variable
    YLVA_DEFAULT_USERNAME is not set.
  */

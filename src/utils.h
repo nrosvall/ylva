@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019-2020 Niko Rosvall <niko@byteptr.com>
+ * Copyright (C) 2019-2021 Niko Rosvall <niko@byteptr.com>
  */
 
 
@@ -8,6 +8,8 @@
 
 #include <stdbool.h>
 #include "entry.h"
+
+#define COLOR_DEFAULT "\x1B[0m"
 
 bool print_entry(Entry_t *entry, int show_password, int as_qrcode);
 char *get_open_db_path_holder_filepath();

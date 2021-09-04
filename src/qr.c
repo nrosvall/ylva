@@ -12,18 +12,11 @@
 #include "qr.h"
 #include "utils.h"
 
-//fonts color
-#define BLACK "\e[0;30m"
-//background color
-#define WHITE "\e[0;107m"
-//Reset to default colors
-#define reset "\e[0m"
-
 // Prints the given QR Code to the console.
 static void printQr(const uint8_t qrcode[])
 {
-    printf(BLACK);
-    printf(WHITE);
+    printf(QR_FG_COLOR);
+    printf(QR_BG_COLOR);
 
     int size = qrcodegen_getSize(qrcode);
     int border = 4;
@@ -38,7 +31,7 @@ static void printQr(const uint8_t qrcode[])
         printf("\n");
     }
 
-    printf(reset);
+    printf(COLOR_DEFAULT);
     printf("\n");
 }
 
