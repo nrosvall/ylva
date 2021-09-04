@@ -1,6 +1,7 @@
 *.o
 ylva
 TAGS
+*.geany
 Titan.vcxproj*
 bin/
 obj/
