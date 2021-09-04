@@ -26,15 +26,15 @@ void regex_find(Entry_t *head, const char *search, int show_password)
     while(head != NULL)
     {
         if((retval = regexec(&regex, head->title, 0, NULL, 0)) == 0)
-            print_entry(head, show_password);
+            print_entry(head, show_password, 0);
         else if((retval = regexec(&regex, head->user, 0, NULL, 0)) == 0)
-            print_entry(head, show_password);
+            print_entry(head, show_password, 0);
         else if((retval = regexec(&regex, head->url, 0, NULL, 0)) == 0)
-            print_entry(head, show_password);
+            print_entry(head, show_password, 0);
         else if((retval = regexec(&regex, head->notes, 0, NULL, 0)) == 0)
-            print_entry(head, show_password);
+            print_entry(head, show_password, 0);
         else if((retval = regexec(&regex, head->stamp, 0, NULL, 0)) == 0)
-            print_entry(head, show_password);
+            print_entry(head, show_password, 0);
 
         head = head->next;
     }

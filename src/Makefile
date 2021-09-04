@@ -3,7 +3,7 @@ CFLAGS?=-g
 CFLAGS+=-std=c11 -Wall
 PREFIX?=/usr/
 MANDIR?=$(PREFIX)/share/man
-LIBS=-lcrypto -lsqlite3 -lrt
+LIBS=-lcrypto -lsqlite3 -lqrcodegen -lrt
 PROG=ylva
 OBJS=$(patsubst %.c, %.o, $(wildcard *.c))
 HEADERS=$(wildcard *.h)

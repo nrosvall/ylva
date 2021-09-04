@@ -9,7 +9,7 @@
 #include <stdbool.h>
 #include "entry.h"
 
-bool print_entry(Entry_t *entry, int show_password);
+bool print_entry(Entry_t *entry, int show_password, int as_qrcode);
 char *get_open_db_path_holder_filepath();
 void write_active_database_path(const char *db_path);
 char *read_active_database_path();

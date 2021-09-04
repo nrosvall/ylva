@@ -245,7 +245,7 @@ bool add_new_entry(int auto_encrypt)
         fprintf(stdout, "Username: using default (%s)\n", user_default);
         snprintf(user, 1024, "%s", user_default);
     }
-    
+
     fprintf(stdout, "Url: ");
     fgets(url, 1024, stdin);
     fprintf(stdout, "Notes: ");
@@ -443,7 +443,7 @@ bool remove_entry(int id, int auto_encrypt)
     return false;
 }
 
-void list_by_id(int id, int show_password, int auto_encrypt)
+void list_by_id(int id, int show_password, int auto_encrypt, int as_qrcode)
 {
     if(!has_active_database())
     {
@@ -463,7 +463,7 @@ void list_by_id(int id, int show_password, int auto_encrypt)
         return;
     }
 
-    print_entry(entry, show_password);
+    print_entry(entry, show_password, as_qrcode);
     entry_free(entry);
 
     if(auto_encrypt == 1)
@@ -495,7 +495,7 @@ void list_all(int show_password, int auto_encrypt, int latest_count)
 
     while(head != NULL)
     {
-        print_entry(head, show_password);
+        print_entry(head, show_password, 0);
         head = head->next;
     }
 
@@ -526,7 +526,7 @@ void find(const char *search, int show_password, int auto_encrypt)
 
     while(head != NULL)
     {
-        print_entry(head, show_password);
+        print_entry(head, show_password, 0);
         head = head->next;
     }
 

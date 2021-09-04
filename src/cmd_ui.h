@@ -10,7 +10,7 @@ bool add_new_entry(int auto_encrypt);
 bool edit_entry(int id, int auto_encrypt);
 bool remove_entry(int id, int auto_encrypt);
 bool copy_entry(int id);
-void list_by_id(int id, int show_password, int auto_encrypt);
+void list_by_id(int id, int show_password, int auto_encrypt, int as_qrcode);
 void list_all(int show_password, int auto_encrypt, int latest_count);
 void find(const char *search, int show_password, int auto_encrypt);
 void find_regex(const char *regex, int show_password);

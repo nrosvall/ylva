@@ -17,6 +17,7 @@
 static int show_password = 0;
 static int force = 0;
 static int auto_encrypt = 0;
+static int show_as_qrcode = 0;
 
 static double v = 1.7;
 
@@ -59,6 +60,7 @@ FLAGS\n\
 \n\
     --auto-encrypt                    Automatically encrypt after exit\n\
     --show-passwords                  Show passwords in listings\n\
+    --show-qrcode                     Show password as QR code in --list-entry\n\
     --force                           Ignore everything and force operation\n\
                                       --force only works with --init option\n\
 \n\
@@ -104,6 +106,7 @@ int main(int argc, char *argv[])
             {"quick",                 required_argument, 0,             'q'},
             {"auto-encrypt",          no_argument,       &auto_encrypt,  1 },
             {"show-passwords",        no_argument,       &show_password, 1 },
+            {"show-qrcode",           no_argument,       &show_as_qrcode,   1 },
             {"force",                 no_argument,       &force,         1 },
             {0, 0, 0, 0}
         };
@@ -154,7 +157,7 @@ int main(int argc, char *argv[])
             list_all(show_password, auto_encrypt, -1);
             break;
         case 'l':
-            list_by_id(atoi(optarg), show_password, auto_encrypt);
+            list_by_id(atoi(optarg), show_password, auto_encrypt, show_as_qrcode);
             break;
         case 'g':
         {
@@ -172,7 +175,7 @@ int main(int argc, char *argv[])
         case 'p':
             show_current_db_path();
             break;
-        case 't': 
+        case 't':
         {
             int count = -2;
             if(argv[optind]) {

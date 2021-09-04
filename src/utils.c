@@ -12,11 +12,12 @@
 #include "entry.h"
 #include "utils.h"
 #include "crypto.h"
+#include "qr.h"
 
 #define COLOR_DEFAULT "\x1B[0m"
 
 /* Function returns NULL if the environment variable
-   YLVA_DEFAULT_USER is not set.
+   YLVA_DEFAULT_USERNAME is not set.
  */
 char* get_default_username()
 {
@@ -49,30 +50,35 @@ static char *get_output_color()
         return COLOR_DEFAULT; /* Handle empty variable too */
 }
 
-bool print_entry(Entry_t *entry, int show_password)
+bool print_entry(Entry_t *entry, int show_password, int as_qrcode)
 {
     char *color = get_output_color();
 
     fprintf(stdout, "=====================================================================\n");
 
-    /* Set the color */
-    fprintf(stdout, "%s", color);
+    if(as_qrcode == 1) {
+        print_entry_as_qr(entry);
+    }
+    else {
+        /* Set the color */
+        fprintf(stdout, "%s", color);
 
-    fprintf(stdout, "ID: %d\n", entry->id);
-    fprintf(stdout, "Title: %s\n", entry->title);
-    fprintf(stdout, "User: %s\n", entry->user);
-    fprintf(stdout, "Url: %s\n", entry->url);
+        fprintf(stdout, "ID: %d\n", entry->id);
+        fprintf(stdout, "Title: %s\n", entry->title);
+        fprintf(stdout, "User: %s\n", entry->user);
+        fprintf(stdout, "Url: %s\n", entry->url);
 
-    if(show_password == 1)
-        fprintf(stdout, "Password: %s\n", entry->password);
-    else
-        fprintf(stdout, "Password: **********\n");
+        if(show_password == 1)
+            fprintf(stdout, "Password: %s\n", entry->password);
+        else
+            fprintf(stdout, "Password: **********\n");
 
-    fprintf(stdout, "Notes: %s\n", entry->notes);
-    fprintf(stdout, "Modified: %s\n", entry->stamp);
+        fprintf(stdout, "Notes: %s\n", entry->notes);
+        fprintf(stdout, "Modified: %s\n", entry->stamp);
 
-    /* Reset the color */
-    fprintf(stdout, "%s", COLOR_DEFAULT);
+        /* Reset the color */
+        fprintf(stdout, "%s", COLOR_DEFAULT);
+    }
 
     fprintf(stdout, "=====================================================================\n");
 
