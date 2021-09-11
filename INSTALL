@@ -17,6 +17,10 @@ On Fedora:
 sudo dnf install sqlite-devel openssl-devel libqrcodegen-devel
 cd into Ylva source directory and type commands:
 
+On Debian:
+
+sudo apt install libsqlite3-dev libssl-dev libqrcodegen-dev
+
 make
 sudo make install
 

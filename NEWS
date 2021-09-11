@@ -1,3 +1,11 @@
+Release 1.7 (2021-09-11)
+        Support for displaying passwords as QR code in terminal
+        Support for YLVA_DEFAULT_USERNAME environment variable
+        Default new password length is now 20 characters
+        Added install documentation
+        Better directory structure for the project
+        Many smaller changes to improve reliability
+
 Release 1.6 (2020-04-17)
         Some changes to command line switches
         Fixing typos in the manual
