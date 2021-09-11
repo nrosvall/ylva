@@ -9,9 +9,9 @@
 #include "entry.h"
 
 //fonts color
-#define QR_FG_COLOR "\e[0;30m"
+#define QR_FG_COLOR "\33[30m"
 //background color
-#define QR_BG_COLOR "\e[0;107m"
+#define QR_BG_COLOR "\33[107m"
 
 void print_entry_as_qr(Entry_t *entry);
 

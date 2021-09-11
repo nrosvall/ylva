@@ -15,8 +15,7 @@
 // Prints the given QR Code to the console.
 static void printQr(const uint8_t qrcode[])
 {
-    printf(QR_FG_COLOR);
-    printf(QR_BG_COLOR);
+    printf(QR_FG_COLOR QR_BG_COLOR);
 
     int size = qrcodegen_getSize(qrcode);
     int border = 4;
